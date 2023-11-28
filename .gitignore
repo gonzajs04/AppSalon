@@ -1,0 +1,10 @@
+node_modules
+mail and pass.txt
+database.sql
+package.json
+pacjage-lock.json
+composer.json
+composer.lock
+gulpfile.js
+vendor
+src
