@@ -22,8 +22,14 @@ class LoginController{
                 if($usuario){
 
                     //CONFIRMO SI la PASSWORD ESTA BIEN Y SI ESTA CONFIRMADO
-                    $usuario->comprobarPasswordAndVerificado($auth->pass);
-                    $alertas = $usuario->getAlertas();
+                    if($usuario->comprobarPasswordAndVerificado($auth->pass)){
+                        session_start(); //INICIO LA SESION DEL USUARIO
+                        $_SESSION['id'] = $usuario->id; //GUARDO EN LA SUPER GLOBAL DE SESSION TODOS LOS DATOS
+                        $_SESSION['nombre'] = $usuario->nombre;
+                        $_SESSION['email'] = $usuario->email;
+                        $_SESSION['login'] = true;
+                    }
+                    $alertas = Usuario::getAlertas();
 
                 }else{
                     Usuario::setAlerta('error','Usuario no encontrado');

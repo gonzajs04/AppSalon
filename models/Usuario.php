@@ -85,12 +85,23 @@
             }
         }
         public function comprobarPasswordAndVerificado($password){
+            $estaConfirmado = false;
             //Password verify tiene 2 argumentos (valor real, hasheado), devuelve TRUE O FALSE
-            $resultado = password_verify($password,$this->pass);
-            if(!$resultado){
-                self::$alertas['error'][] = "Contraseña incorrecta";
- 
+            if(!$this->confirmado){
+                self::$alertas['error'][] = "El usuario no esta confirmado";
+                return $estaConfirmado;
+            }else{
+                $estaConfirmado = true;
+                $resultado = password_verify($password,$this->pass);
+                if(!$resultado){
+                    self::$alertas['error'][] = "Contraseña incorrecta";
+                    $estaConfirmado = false;
+                    
+                }
             }
+
+            return $estaConfirmado;
+           
 
         }
     }
