@@ -84,6 +84,13 @@
                 self::$alertas['error'][] = "Debes ingresar una contraseña";
             }
         }
+
+        public function validarEmail(){
+            if(!$this->email){
+                self::$alertas['error'][] = "Debes ingresar un mail";
+            }
+            return self::$alertas; //retorno el error
+        }
         public function comprobarPasswordAndVerificado($password){
             $estaConfirmado = false;
             //Password verify tiene 2 argumentos (valor real, hasheado), devuelve TRUE O FALSE

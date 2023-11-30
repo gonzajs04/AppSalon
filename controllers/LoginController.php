@@ -34,9 +34,11 @@ class LoginController{
 
                         //Redireccionamiento
                         if($usuario->esAdmin == "1"){
-                            echo "Es admin";
+                            //SI ES NULO, SE ASIGNA NULO
+                            $_SESSION['admin'] = $usuario->esAdmin ?? null;
+                            header("Location: /admin");
                         }else{
-                            echo "Es cliente";
+                            header("Location: /cita");
                         }
                     }
                     $alertas = Usuario::getAlertas();
@@ -63,12 +65,57 @@ class LoginController{
     }
 
     public static function olvide(Router $router){
-        $router->render('auth/olvide-password');
+        $alertas = [];
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $auth = new Usuario($_POST);
+            $alertas = $auth->validarEmail();
+            if(empty($alertas)){
+                $usuario = Usuario::where('email',$auth->email);
+
+                if($usuario && $usuario->confirmado == 1){
+                    //Esta confirmado
+
+                    //Generar un token
+                    $usuario->crearToken();
+
+                    //// Actualiza la base de datos con el token actualizado
+                    $usuario->guardar(); 
+
+
+                    //Enviar mail con instrucciones
+                    $email = new Email($usuario->email,$usuario->nombre,$usuario->token);
+                    $email->enviarInstrucciones();
+                    
+
+                    //Alerta de exito
+                    Usuario::setAlerta('exito',"Revisa tu casilla de emails");
+                   
+                    
+
+                }else{
+                    Usuario::setAlerta("error","El usuario no existe o no esta confirmado");
+                   
+
+                }
+            }
+        }
+        $alertas = Usuario::getAlertas();
+        $router->render('auth/olvide-password',[
+            "alertas"=>$alertas
+
+        ]);
 
     }
 
-    public static function recuperar(){
-        echo "Desde recuperar mi contraseña";
+    public static function recuperar(Router $router){
+        
+
+
+
+        $router->render('auth/recuperar-password',[
+            
+
+        ]);
 
     }
     public static function crear(Router $router){

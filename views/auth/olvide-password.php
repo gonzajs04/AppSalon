@@ -1,3 +1,4 @@
+<?php include_once __DIR__ . '/../templates/alertas.php';?>
 <h1 class="nombre-pagina">Restablecer contraseña</h1>
 <p class="descripcion-pagina">Restablece tu contraseña escribiendo tu email</p>
 
