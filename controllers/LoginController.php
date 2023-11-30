@@ -23,11 +23,21 @@ class LoginController{
 
                     //CONFIRMO SI la PASSWORD ESTA BIEN Y SI ESTA CONFIRMADO
                     if($usuario->comprobarPasswordAndVerificado($auth->pass)){
+                     
                         session_start(); //INICIO LA SESION DEL USUARIO
+
+                        //Autenticar usuario
                         $_SESSION['id'] = $usuario->id; //GUARDO EN LA SUPER GLOBAL DE SESSION TODOS LOS DATOS
                         $_SESSION['nombre'] = $usuario->nombre;
                         $_SESSION['email'] = $usuario->email;
                         $_SESSION['login'] = true;
+
+                        //Redireccionamiento
+                        if($usuario->esAdmin == "1"){
+                            echo "Es admin";
+                        }else{
+                            echo "Es cliente";
+                        }
                     }
                     $alertas = Usuario::getAlertas();
 
