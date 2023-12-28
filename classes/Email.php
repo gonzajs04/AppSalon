@@ -2,6 +2,7 @@
 
 namespace Classes;
 
+use Model\ActiveRecord;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Email{
@@ -17,6 +18,7 @@ class Email{
 
     public function enviarConfirmacion(){
         //crear el objeto de email
+        $alertas=[];
         $phpmailer = new PHPMailer();
         $phpmailer->isSMTP();
         $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
@@ -44,7 +46,9 @@ class Email{
 
         //Enviar el email
         if($phpmailer->send()){
-            echo "Enviado correctamente";
+            ActiveRecord::setAlerta('exito',"Enviado correctamente");
+            $alertas = ActiveRecord::getAlertas();
+            include_once __DIR__ . '/../views/templates/alertas.php';
         }
     
      
@@ -52,6 +56,8 @@ class Email{
 
     public function enviarInstrucciones(){
           //crear el objeto de email
+          $alertas = [];
+          $seEnvio = false;
           $phpmailer = new PHPMailer();
           $phpmailer->isSMTP();
           $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
@@ -80,8 +86,13 @@ class Email{
           
         //Enviar el email
         if($phpmailer->send()){
-            echo "Enviado correctamente";
+            $seEnvio = true;
         }
+    
+        return $seEnvio;
+       
+      
+        
     }
 }
 

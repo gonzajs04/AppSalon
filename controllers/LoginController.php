@@ -84,18 +84,19 @@ class LoginController{
 
                     //Enviar mail con instrucciones
                     $email = new Email($usuario->email,$usuario->nombre,$usuario->token);
-                    $email->enviarInstrucciones();
-                    
-
-                    //Alerta de exito
-                    Usuario::setAlerta('exito',"Revisa tu casilla de emails");
+                    if(!$email->enviarInstrucciones()){
+                                //Alerta de exito
+                       Usuario::setAlerta('error',"No se envio correctamente");
+                       
+                    }else{
+                          //Alerta de error de envio
+                         Usuario::setAlerta('exito',"Revisa tu casilla de emails");      
+                    }
                    
-                    
 
                 }else{
                     Usuario::setAlerta("error","El usuario no existe o no esta confirmado");
                    
-
                 }
             }
         }
@@ -108,7 +109,7 @@ class LoginController{
     }
 
     public static function recuperar(Router $router){
-        
+        $alertas = [];
 
 
 
