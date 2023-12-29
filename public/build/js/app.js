@@ -1,1 +1,1 @@
-alert("ASDASDASD");
+let paso=1;function iniciarApp(){tabs()}function mostrarSeccion(){}function tabs(){const t=document.querySelectorAll(".tabs button");t.forEach(a=>{a.addEventListener("click",c=>{parseInt(c.target.dataset.paso);t.forEach(t=>t.classList.remove("actual")),a.classList.add("actual"),mostrarSeccion()})})}document.addEventListener("DOMContentLoaded",()=>{iniciarApp()});
