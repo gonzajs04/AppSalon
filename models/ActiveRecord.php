@@ -22,7 +22,7 @@ class ActiveRecord {
 
     // Validación
     public static function getAlertas() {
-        return static::$alertas;
+        return self::$alertas;
     }
 
     public function validar() {

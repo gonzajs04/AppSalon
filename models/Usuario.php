@@ -78,10 +78,10 @@
 
         public function validarLogin(){
             if(!$this->email){
-                self::$alertas['error'][] = "Debes ingresar un mail";
+                static::$alertas['error'][] = "Debes ingresar un mail";
             }
             if(!$this->pass){
-                self::$alertas['error'][] = "Debes ingresar una contraseña";
+                static::$alertas['error'][] = "Debes ingresar una contraseña";
             }
         }
 
@@ -111,8 +111,20 @@
            
 
         }
+ 
+
+
+    public function validarPassword(){
+         if(!$this->pass){
+            self::$alertas['error'][] = "El password es obligatorio";
+         }
+         if(strlen($this->pass)<6){
+            self::$alertas['error'][] = "El password debe tener al menos 6 caracteres";
+
+         }
+
+         return self::$alertas;
     }
 
-
-
+}
 ?>
