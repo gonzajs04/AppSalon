@@ -6,13 +6,13 @@
 
 <div class="app">
     <nav class="tabs">
-        <button type="button" class="actual" data-paso="1">Servicios</button>
+        <button type="button" class="actual " data-paso="1">Servicios</button>
         <button type="button"  data-paso="2" >Informacion Cita</button>
         <button type="button"  data-paso="3">Resumen</button>
 
     </nav>
 
-    <div id="paso-1" class="seccion">
+    <div id="paso-1" class="seccion mostrar">
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuacion</p>
         <div id="servicios" class="listado-servicios"></div>
