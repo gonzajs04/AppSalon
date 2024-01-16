@@ -14,6 +14,21 @@ function iniciarApp() {
     paginaSiguiente(); 
     paginaAnterior();
 
+
+    consumirApi(); //Consulta la API en el backend de PHP
+}
+
+async function consumirApi(){ //funcion asincrona debido a que necesitamos que se ejecuten otras funciones mientras se consulta la API
+
+    try {
+        const response = await fetch("http://localhost:3000/api/servicios"); //Hasta que no se complete el fetch, no se ejecutara la siguiente linea. Esto me devuelve un JSON
+        
+        return await response.json(); // JSON a OBJETO O ARRAY
+    } catch (error) {
+        console.error(error);
+    }
+    //El try catch permite que la aplicacion siga funcionando aunque haya un ERROR. Consume mucha memoria, es lento. Se debe usar en partes criticas.
+   
 }
 
 function mostrarSeccion() {
