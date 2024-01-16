@@ -5,6 +5,17 @@ Esta aplicacion permite hacer todo el procedimiento normal de una pagina web con
 Para el registro de nuevos clientes, se utilizo el paquete PHPmailer y MailTrap para la validacion de cuentas a traves de TOKENS.
 
 
+GIT IGNORE:
+node_modules
+mail and pass.txt
+database.sql
+package.json
+composer.json
+composer.lock
+gulpfile.js
+vendor
+src
+
 Diferencia entre static y self
 
 Diferencia entre static:: y self::
@@ -33,3 +44,14 @@ https://www.youtube.com/watch?v=ACpJ2n8KMYg&ab_channel=ClubeFull-Stack
 
 phelpscole990@gmail.com
 PhelpsCole1247!
+
+
+Palabras Git:
+fix: arreglar problemas
+feat: agregar funcionalidades
+update: actualizacion realizada
+remove: se elimino archivo o eliminacion de codigo
+refactor: reorganizar el codigo sin cambiar funcionalidad
+chore: actualizacion de dependencias librerias, ajustes de configuracion
+docs: cambios en la doc
+style: cambios en el diseño e interfaz grafica

@@ -1,9 +1,2 @@
 node_modules
-mail and pass.txt
-database.sql
-package.json
-composer.json
-composer.lock
-gulpfile.js
-vendor
-src
+db.sql

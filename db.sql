@@ -20,7 +20,7 @@ PRIMARY KEY(id)
 
 CREATE TABLE Servicios(
 id int not null auto_increment,
-nombre_servicio varchar(20),
+nombre varchar(20),
 precio int,
 PRIMARY KEY(id)
 );
@@ -28,9 +28,9 @@ PRIMARY KEY(id)
 CREATE TABLE Citas(
     id int not null auto_increment,
     idUsuario int not null,
-    fecha_cita date not null,
+    fecha date not null,
 
-    hora_cita time not null,
+    hora time not null,
     PRIMARY KEY (id),
 
     CONSTRAINT FK_3PersonaCita FOREIGN KEY(idUsuario) references Usuarios(id)
@@ -44,3 +44,11 @@ CREATE TABLE Citas_Servicios(
     constraint FK1_CitaServicios foreign key (idCita) references Citas(id),
     constraint FK2_ServicioCita foreign key (idServicio) references Servicios(id)
 );
+
+INSERT INTO Servicios (nombre, precio) VALUES
+('Corte de pelo', 200),
+('Coloración', 300),
+('Peinado', 150),
+('Tratamiento capilar', 250),
+('Manicura', 50),
+('Pedicura', 70);
