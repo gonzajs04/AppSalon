@@ -19,16 +19,41 @@ function iniciarApp() {
 }
 
 async function consumirApi(){ //funcion asincrona debido a que necesitamos que se ejecuten otras funciones mientras se consulta la API
-
     try {
         const response = await fetch("http://localhost:3000/api/servicios"); //Hasta que no se complete el fetch, no se ejecutara la siguiente linea. Esto me devuelve un JSON
         
-        return await response.json(); // JSON a OBJETO O ARRAY
+        const servicios =  await response.json(); // JSON a OBJETO O ARRAY
+        mostrarServicios(servicios);
+
     } catch (error) {
         console.error(error);
     }
     //El try catch permite que la aplicacion siga funcionando aunque haya un ERROR. Consume mucha memoria, es lento. Se debe usar en partes criticas.
    
+}
+
+function mostrarServicios(servicios){
+    servicios.forEach(servicio =>{
+        const {id,nombre,precio} = servicio;
+
+        const nombreServicio = document.createElement('P');
+        nombreServicio.classList.add('nombre-servicio');
+        nombreServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.classList.add('precio-servicio');
+        precioServicio.textContent =  `$${precio}`;
+        
+        const servicioDiv = document.createElement('DIV');
+        servicioDiv.classList.add('servicio');
+        servicioDiv.dataset.idServicio = id; //le añado una id en especifico correspondiente al servicio a cada contenedor
+
+        servicioDiv.appendChild(nombreServicio)
+        servicioDiv.appendChild(precioServicio)
+
+        document.querySelector('#servicios').appendChild(servicioDiv);
+
+    } )
 }
 
 function mostrarSeccion() {
