@@ -14,15 +14,13 @@ class LoginController{
            $auth = new Usuario($_POST); //CREO EL USUARIO CON LO QUE INGRESO EN EL FORM
            $auth->validarLogin(); //VALIDO CUANTAS ALERTAS HAY Y LAS AGREGO
            $alertas = $auth->getAlertas(); //OBTENGO LAS ALERTAS CORRESPONDIENTES A LA INSTANCIA
-
            if(empty($alertas)){//si no hay errores, significa que ingreso mail y pass
 
             //verficamos si existe el usuario
             $usuario = Usuario::where('email', $auth->email);
                 if($usuario){
-
                     //CONFIRMO SI la PASSWORD ESTA BIEN Y SI ESTA CONFIRMADO
-                    if($usuario->comprobarPasswordAndVerificado($auth->pass)){
+                    if($usuario->comprobarPasswordAndVerificado($auth->pass,$usuario->pass)){
                      
                         session_start(); //INICIO LA SESION DEL USUARIO
 
@@ -85,7 +83,7 @@ class LoginController{
                     //Enviar mail con instrucciones
                     $email = new Email($usuario->email,$usuario->nombre,$usuario->token);
                     if(!$email->enviarInstrucciones()){
-                                //Alerta de exito
+                        //Alerta de exito
                        Usuario::setAlerta('error',"No se envio correctamente");
                        
                     }else{
@@ -168,10 +166,8 @@ class LoginController{
                 }else{
                     //HASHEAR PASSWORD
                     $usuario->hashPassword();
-                    
                     //GENERAR UN TOKEN UNICO
                     $usuario->crearToken();
-
 
                     //Enviar el email
                     $email = new Email($usuario->email,$usuario->nombre,$usuario->token);

@@ -24,10 +24,12 @@ class Email{
         $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
         $phpmailer->SMTPAuth = true;
         $phpmailer->Port = 2525;
-        $phpmailer->Username = '94f2e9a2c92946';
-        $phpmailer->Password = '0a7131951c6720';
-        $phpmailer->setFrom('appsalon04@gmail.com'); // quien envia el email
-        $phpmailer->addAddress('appsalon04@gmail.com'); //setea email del receptor
+        //$phpmailer->Username = '94f2e9a2c92946';
+        //$phpmailer->Password = '0a7131951c6720'; 
+        $phpmailer->Username = '319e2585a75f2b';
+        $phpmailer->Password = '37659fcf58cb08';
+        $phpmailer->setFrom('phelpscole990@gmail.com'); // quien envia el email cambiar a appsalon
+        $phpmailer->addAddress('phelpscole990@gmail.com'); //setea email del receptor cambiar a appsalon
         $phpmailer->Subject = "Confirma tu cuenta"; //ASUNTO DEL MAIL
 
 
@@ -43,13 +45,13 @@ class Email{
         $contenido.="</html>";
 
         $phpmailer->Body = $contenido; // agrego el contenido en el cuerpo del mail
+      //Enviar el email
+      if($phpmailer->send()){
+        $seEnvio = true;
+    }
 
-        //Enviar el email
-        if($phpmailer->send()){
-            ActiveRecord::setAlerta('exito',"Enviado correctamente");
-            $alertas = ActiveRecord::getAlertas();
-            include_once __DIR__ . '/../views/templates/alertas.php';
-        }
+
+    return $seEnvio;
     
      
     }
@@ -63,10 +65,12 @@ class Email{
           $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
           $phpmailer->SMTPAuth = true;
           $phpmailer->Port = 2525;
-          $phpmailer->Username = '94f2e9a2c92946';
-          $phpmailer->Password = '0a7131951c6720';
-          $phpmailer->setFrom('appsalon04@gmail.com'); // quien envia el email
-          $phpmailer->addAddress('appsalon04@gmail.com'); //setea email del receptor
+          //$phpmailer->Username = '94f2e9a2c92946';
+          //$phpmailer->Password = '0a7131951c6720';
+          $phpmailer->Username = '319e2585a75f2b';
+          $phpmailer->Password = '37659fcf58cb08';
+          $phpmailer->setFrom('phelpscole990@gmail.com'); // quien envia el email
+          $phpmailer->addAddress('phelpscole990@gmail.com'); //setea email del receptor
           $phpmailer->Subject = "Restablece tu password"; //ASUNTO DEL MAIL
   
   

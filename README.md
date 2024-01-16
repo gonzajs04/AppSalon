@@ -27,3 +27,9 @@ echo MiSubClase::obtenerConstante();  // Devuelve 'Mundo'
 Por que devuelve el “Mundo” y no “Hola”? Porque estamos invocando desde MiSubClase y la constante en esa invocación tiene como valor “Mundo” y el método específicamente declara que lo que se retornara será estático.
 De lo contrario, si diría return self:: retorna “Hola”.
 https://www.youtube.com/watch?v=ACpJ2n8KMYg&ab_channel=ClubeFull-Stack
+
+
+
+
+phelpscole990@gmail.com
+PhelpsCole1247!

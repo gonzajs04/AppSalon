@@ -67,8 +67,7 @@
 
         //Hashear Password
         public function hashPassword(){
-            
-            $this->pass = password_hash($this->pass,PASSWORD_BCRYPT);
+            $this->pass = password_hash($this->pass, PASSWORD_BCRYPT);
         }
 
         //CREAR TOKEN
@@ -91,7 +90,8 @@
             }
             return self::$alertas; //retorno el error
         }
-        public function comprobarPasswordAndVerificado($password){
+        public function comprobarPasswordAndVerificado($password,$hashed_password){
+           
             $estaConfirmado = false;
             //Password verify tiene 2 argumentos (valor real, hasheado), devuelve TRUE O FALSE
             if(!$this->confirmado){
@@ -99,7 +99,7 @@
                 return $estaConfirmado;
             }else{
                 $estaConfirmado = true;
-                $resultado = password_verify($password,$this->pass);
+                $resultado = password_verify($password, $hashed_password);
                 if(!$resultado){
                     self::$alertas['error'][] = "Contraseña incorrecta";
                     $estaConfirmado = false;

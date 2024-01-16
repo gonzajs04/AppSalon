@@ -34,8 +34,10 @@ class ActiveRecord {
     public static function consultarSQL($query) {
         // Consultar la base de datos
         $resultado = self::$db->query($query);
+        
 
         // Iterar los resultados
+        
         $array = [];
         while($registro = $resultado->fetch_assoc()) {
             $array[] = static::crearObjeto($registro);
@@ -92,15 +94,17 @@ class ActiveRecord {
 
     // Registros - CRUD
     public function guardar() {
-        $resultado = '';
         if(!is_null($this->id)) {
             // actualizar
             $resultado = $this->actualizar();
         } else {
             // Creando un nuevo registro
             $resultado = $this->crear();
+
         }
         return $resultado;
+
+
     }
 
     // Todos los registros
@@ -141,8 +145,10 @@ class ActiveRecord {
         $query .= join("', '", array_values($atributos));
         $query .= " ') ";
 
+
         // Resultado de la consulta
         $resultado = self::$db->query($query);
+
         return [
            'resultado' =>  $resultado,
            'id' => self::$db->insert_id
