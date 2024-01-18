@@ -238,12 +238,48 @@ function seleccionarHora(){
 
 function mostrarResumen(){
     const resumen = document.querySelector('.contenido-resumen');
-    console.log(cita)
+    //Limpiamos el texto que dice RESUMEN y aca se veran los datos del resumen.
+    while(resumen.firstChild){ // Mientras se llame a resumen desaparecera el primer texto y las alertas anteriores
+        resumen.removeChild(resumen.firstChild)
+    }
+
     if(Object.values(cita).includes("") || cita.servicios.length===0){ //Si el objeto de cita tiene un valor vacio o no hay ningun servicio seleccionado, que muestre una alerta
         mostrarAlerta("Faltan rellenar datos o servicios","error",".contenido-resumen",false);
-    }else{
-        mostrarAlerta("Todos los datos estan bien","exito",".contenido-resumen",false);
+        return;
     }
+        mostrarAlerta("Todos los datos estan bien","exito",".contenido-resumen",false);
+
+        // Formatear el div de resumen
+        const {nombre,fecha,hora,servicios} = cita;
+        const nombreCliente = document.createElement("P");
+        nombreCliente.innerHTML = `<span>Nombre: </span> ${nombre}`;
+
+        fechaCita = document.createElement("P");
+        fechaCita.innerHTML = `<span>Fecha: </span> ${fecha}`;
+
+        const horaCita =document.createElement("P");
+        horaCita.innerHTML = `<span>Hora: </span>${hora}`;
+
+
+        for(i=0; i<servicios.length;i++){
+            const contenedorServicio = document.createElement("DIV");
+            contenedorServicio.classList.add('contenedor-servicio');
+
+            const textoServicio = document.createElement("P");
+            textoServicio.textContent = servicios[i].nombre;
+
+            const precioServicio = document.createElement("P");
+            precioServicio.innerHTML = `<span>Precio: </span> $ ${servicios[i].precio}`;
+
+            contenedorServicio.appendChild(textoServicio);
+            contenedorServicio.appendChild(precioServicio);
+            resumen.appendChild(contenedorServicio);
+        }
+
+        resumen.appendChild(nombreCliente);
+        resumen.appendChild(fechaCita);
+        resumen.appendChild(horaCita);
+       
 }
 
 function mostrarAlerta(mensaje,tipo,seccion,desaparece = true){
