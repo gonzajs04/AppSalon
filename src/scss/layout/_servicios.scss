@@ -11,7 +11,7 @@
 
     .servicio {
         background-color: v.$blanco;
-        padding: 3rem;
+        padding: 1rem;
         border-radius: 1rem;
         transition-property: transform;
         transition-duration: 300ms;
@@ -25,10 +25,12 @@
         }
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.025);
+            cursor: pointer;
         }
 
         p {
+            user-select: none; // deshabilito la posibilidad de seleccionar el texto
             color: v.$negro;
             margin: 0 0 calc( v.$separacion / 4) 0;
         }

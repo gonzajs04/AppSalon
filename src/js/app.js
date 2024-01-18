@@ -2,6 +2,13 @@ let paso = 1;
 const pasoInicial = 1;
 const pasoFinal = 3;
 
+const cita = {
+    nombre: '',
+    fecha: '',
+    hora: '',
+    servicios:[]
+
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     iniciarApp();
@@ -16,6 +23,8 @@ function iniciarApp() {
 
 
     consumirApi(); //Consulta la API en el backend de PHP
+
+
 }
 
 async function consumirApi(){ //funcion asincrona debido a que necesitamos que se ejecuten otras funciones mientras se consulta la API
@@ -47,13 +56,28 @@ function mostrarServicios(servicios){
         const servicioDiv = document.createElement('DIV');
         servicioDiv.classList.add('servicio');
         servicioDiv.dataset.idServicio = id; //le añado una id en especifico correspondiente al servicio a cada contenedor
+       // servicioDiv.setAttribute('aria-label', `Servicio ${nombreServicio} con precio de ${precioServicio}`);
+
 
         servicioDiv.appendChild(nombreServicio)
         servicioDiv.appendChild(precioServicio)
 
         document.querySelector('#servicios').appendChild(servicioDiv);
 
-    } )
+        //Llenar el array de cita con el servicio clickeado.
+        //servicioDiv.onclick = seleccionarServicio; //No le pongo parentesis ya que si colocamos parentesis se llamara en todo momento esta funcion una vez clickee el usuario. Ahora, es necesario pasarle el servicio, como hacemos? Por medio de una funcion callback
+        servicioDiv.onclick = ()=>{
+            seleccionarServicio(servicio);
+        }
+        
+    } );
+}
+
+function seleccionarServicio(servicio){
+
+    console.log(servicio);
+
+
 }
 
 function mostrarSeccion() {
