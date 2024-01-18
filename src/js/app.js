@@ -180,15 +180,16 @@ function nombreCliente(){
 }
 
 function seleccionarFecha(){
+
     const fecha = document.querySelector('#fecha');
     fecha.addEventListener('input',(e)=>{ //Se llama cuando cambia el valor del input en todo momento
         //Evitar que el usuario seleccione una fecha que no se trabaja: Sabado o DOMINGO o ambos
 
         const dia =  new Date(e.target.value).getUTCDay(); //Obtengo el numero del dia seleccionado
-        if([6,0].includes(dia)){ // Evaluo si es Sabado o Domingo
+        if(comprobarFechaAnteriorActual(e.target) || [6,0].includes(dia)){ // Evaluo si es Sabado o Domingo
             fecha.value = '';
             fecha.style.background = "white";
-            mostrarAlerta('Fines de semana no permitidos',"error",".formulario");
+            mostrarAlerta('Fines de semana, dias anteriores u hoy no permitidos',"error",".formulario");
         }else{
             cita.fecha = e.target.value;
             fecha.style.background = "lightgreen";
@@ -196,7 +197,13 @@ function seleccionarFecha(){
         }
     })
 }
-
+function comprobarFechaAnteriorActual(contenedorFecha){
+    let esAnterior = false;
+    if(new Date(contenedorFecha.value) <= new Date()){
+        esAnterior = true;
+    }
+    return esAnterior;
+}
 function mostrarAlerta(mensaje,tipo,seccion){
     const alertaPrevia = document.querySelector('alerta');
     if(alertaPrevia) return; // SI hay una alerta previa, que no la coloque

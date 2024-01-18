@@ -29,7 +29,7 @@
 
             <div class="campo">
                 <label for="fecha">Fecha</label>
-                <input type="date" name="fecha" id="fecha">
+                <input type="date" name="fecha" id="fecha" min="<?php echo date('Y-m-d',strtotime('+1 day'));?>">
             </div>
 
             <div class="campo">
