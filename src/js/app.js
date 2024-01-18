@@ -78,7 +78,18 @@ function mostrarServicios(servicios){
 function seleccionarServicio(servicio){
     const {id} = servicio;
     const {servicios} = cita; //extraigo el array de servicios de el objeto de Cita
-    cita.servicios = [...servicios,servicio]; // Creo una copia al array de servicios y le agrego el servicio seleccionado. El array devuelto es almacenado en el array de servicios del objeto cita.
+   
+    //Comprobar si un servicio fue agregado o se quita
+    if(servicios.some(agregado => agregado.id === id)){ // Some Devuelve T o F
+        //Eliminarlo
+        cita.servicios = servicios.filter(agregado => agregado.id !== id); //Filtramos cual es diferente al que queremos eliminar para que quede en el carrito.
+
+    }else{
+        //Agregarlo
+        cita.servicios = [...servicios,servicio]; // Creo una copia al array de servicios y le agrego el servicio seleccionado. El array devuelto es almacenado en el array de servicios del objeto cita.
+    }
+
+    //Resaltar servicio seleccionado
     const divServicio = document.querySelector(`[data-id-servicio="${id}"`);
     divServicio.classList.toggle("seleccionado");
 }
