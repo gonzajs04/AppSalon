@@ -56,6 +56,7 @@ function mostrarServicios(servicios){
         const servicioDiv = document.createElement('DIV');
         servicioDiv.classList.add('servicio');
         servicioDiv.dataset.idServicio = id; //le añado una id en especifico correspondiente al servicio a cada contenedor
+        //En el html se vera asi: data-id-servicio, quita el camelCase y pone guiones y minusculas
        // servicioDiv.setAttribute('aria-label', `Servicio ${nombreServicio} con precio de ${precioServicio}`);
 
 
@@ -68,16 +69,18 @@ function mostrarServicios(servicios){
         //servicioDiv.onclick = seleccionarServicio; //No le pongo parentesis ya que si colocamos parentesis se llamara en todo momento esta funcion una vez clickee el usuario. Ahora, es necesario pasarle el servicio, como hacemos? Por medio de una funcion callback
         servicioDiv.onclick = ()=>{
             seleccionarServicio(servicio);
+            //servicioDiv.classList.toggle("seleccionado");
         }
         
     } );
 }
 
 function seleccionarServicio(servicio){
-
-    console.log(servicio);
-
-
+    const {id} = servicio;
+    const {servicios} = cita; //extraigo el array de servicios de el objeto de Cita
+    cita.servicios = [...servicios,servicio]; // Creo una copia al array de servicios y le agrego el servicio seleccionado. El array devuelto es almacenado en el array de servicios del objeto cita.
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"`);
+    divServicio.classList.toggle("seleccionado");
 }
 
 function mostrarSeccion() {
