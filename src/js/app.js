@@ -187,11 +187,30 @@ function seleccionarFecha(){
         const dia =  new Date(e.target.value).getUTCDay(); //Obtengo el numero del dia seleccionado
         if([6,0].includes(dia)){ // Evaluo si es Sabado o Domingo
             fecha.value = '';
-            fecha.style.background = "red";
+            fecha.style.background = "white";
+            mostrarAlerta('Fines de semana no permitidos',"error",".formulario");
         }else{
             cita.fecha = e.target.value;
             fecha.style.background = "lightgreen";
 
         }
     })
+}
+
+function mostrarAlerta(mensaje,tipo,seccion){
+    const alertaPrevia = document.querySelector('alerta');
+    if(alertaPrevia) return; // SI hay una alerta previa, que no la coloque
+
+    //Scripting para crear la alerta
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo); 
+    const contenedor = document.querySelector(seccion);
+    contenedor.appendChild(alerta);
+
+    //Eliminar la alerta
+    setTimeout(()=>{
+        alerta.remove();
+    },3000)
 }
