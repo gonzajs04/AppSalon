@@ -28,6 +28,8 @@ function iniciarApp() {
 
     seleccionarFecha(); //Añade la fecha en el objeto de cita
     seleccionarHora(); //Añade la hora de la cita en el objeto
+
+    mostrarResumen(); //Muestra el resumen
 }
 
 async function consumirApi(){ //funcion asincrona debido a que necesitamos que se ejecuten otras funciones mientras se consulta la API
@@ -68,7 +70,6 @@ function mostrarSeccion() {
 }
 
 function tabs() {
-
     // Agrega y cambia la variable de paso según el tab seleccionado
     const botones = document.querySelectorAll('.tabs button');
     botones.forEach( boton => {
@@ -79,6 +80,10 @@ function tabs() {
             mostrarSeccion();
 
             botonesPaginador(); 
+
+            if(paso === 3){
+                mostrarResumen();
+            }
         });
     });
 }
@@ -93,7 +98,6 @@ function botonesPaginador() {
     } else if (paso === 3) {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
-
     } else {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.remove('ocultar');
@@ -209,7 +213,6 @@ function comprobarFechaAnteriorActual(contenedorFecha){
 function seleccionarHora(){
     //Selecciono el input de la hora
     const inputHora = document.querySelector("#hora");
-
     //Evento de cambio de hora
     inputHora.addEventListener('input',(e)=>{
           const horaCita = e.target.value;
@@ -224,8 +227,8 @@ function seleccionarHora(){
 
           }else{
             //Le almaceno al input la hora de la cita
-            inputHora.value = horaCita;
-            cita.hora = hora; //Guardo en el objeto de la cita, el valor del input
+            inputHora.value = e.target.value;
+            cita.hora = horaCita; //Guardo en el objeto de la cita, el valor del input
             inputHora.style.background = "lightgreen"; //Input verde para indicar que esta correcto el horario de la cita
           }
     }) 
@@ -233,9 +236,21 @@ function seleccionarHora(){
 
 }
 
-function mostrarAlerta(mensaje,tipo,seccion){
-    const alertaPrevia = document.querySelector('alerta');
-    if(alertaPrevia) return; // SI hay una alerta previa, que no la coloque
+function mostrarResumen(){
+    const resumen = document.querySelector('.contenido-resumen');
+    console.log(cita)
+    if(Object.values(cita).includes("") || cita.servicios.length===0){ //Si el objeto de cita tiene un valor vacio o no hay ningun servicio seleccionado, que muestre una alerta
+        mostrarAlerta("Faltan rellenar datos o servicios","error",".contenido-resumen",false);
+    }else{
+        mostrarAlerta("Todos los datos estan bien","exito",".contenido-resumen",false);
+    }
+}
+
+function mostrarAlerta(mensaje,tipo,seccion,desaparece = true){
+    const alertaPrevia = document.querySelector('.alerta');
+    if(alertaPrevia){
+        alertaPrevia.remove();
+    }; // SI hay una alerta previa, que no la coloque y la elimine
 
     //Scripting para crear la alerta
     const alerta = document.createElement('DIV');
@@ -246,7 +261,11 @@ function mostrarAlerta(mensaje,tipo,seccion){
     contenedor.appendChild(alerta);
 
     //Eliminar la alerta
-    setTimeout(()=>{
-        alerta.remove();
-    },3000)
+    
+    if(desaparece){
+        setTimeout(()=>{
+            alerta.remove();
+        },3000)
+    }
 }
+
