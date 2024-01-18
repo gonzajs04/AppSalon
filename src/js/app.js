@@ -27,6 +27,7 @@ function iniciarApp() {
     nombreCliente(); //Almaceno en el objeto de cita el nombre del cliente
 
     seleccionarFecha(); //Añade la fecha en el objeto de cita
+    seleccionarHora(); //Añade la hora de la cita en el objeto
 }
 
 async function consumirApi(){ //funcion asincrona debido a que necesitamos que se ejecuten otras funciones mientras se consulta la API
@@ -204,6 +205,34 @@ function comprobarFechaAnteriorActual(contenedorFecha){
     }
     return esAnterior;
 }
+
+function seleccionarHora(){
+    //Selecciono el input de la hora
+    const inputHora = document.querySelector("#hora");
+
+    //Evento de cambio de hora
+    inputHora.addEventListener('input',(e)=>{
+          const horaCita = e.target.value;
+          const hora = horaCita.split(":")[0]; //Extraigo solo la hora para validar que el usuario esta sacando turno en horario que esta abierto
+          if(hora <= 10 || hora>21){ //Controlo que el turno sea sacado entre las 10am y 22pm
+
+            //Si la hora esta mal, blanqueo el input para que no tenga valor
+            inputHora.value = ""
+            //Mostrar alerta de error
+            mostrarAlerta("El horario debe estar entre las 10am y antes de las 22pm","error",".formulario");
+            inputHora.style.background = "white";
+
+          }else{
+            //Le almaceno al input la hora de la cita
+            inputHora.value = horaCita;
+            cita.hora = hora; //Guardo en el objeto de la cita, el valor del input
+            inputHora.style.background = "lightgreen"; //Input verde para indicar que esta correcto el horario de la cita
+          }
+    }) 
+ 
+
+}
+
 function mostrarAlerta(mensaje,tipo,seccion){
     const alertaPrevia = document.querySelector('alerta');
     if(alertaPrevia) return; // SI hay una alerta previa, que no la coloque
