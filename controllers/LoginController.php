@@ -57,10 +57,11 @@ class LoginController{
         
     }
 
-    public static function logout(){
-        echo "Desde logout";
-
-    }
+    public static function logout(Router $router){
+        session_start();
+        $_SESSION = [];
+        header("Location: /");
+        }
 
     public static function olvide(Router $router){
         $alertas = [];
@@ -224,7 +225,7 @@ class LoginController{
             "alertas" =>$alertas
         ]);
     }
+  
     
 }
 
-?>

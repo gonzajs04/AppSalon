@@ -39,6 +39,9 @@ $router->get("/api/servicios",[ApiController::class,'index']);
 
 $router->post("/api/citas",[ApiController::class,"guardar"]);
 
+//ADMIN
+$router->("/admin",[AdminController::class],"index");
+
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
