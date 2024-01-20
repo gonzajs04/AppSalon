@@ -1,7 +1,13 @@
+<div class="barra">
+<p>Hola! <span> <?php echo $nombre?></span></p>
+
+</div>
+
 <div class="container-titulo">
     <h1 class="nombre-pagina">Crear nueva cita</h1>
     <p class="descripcion-pagina movi">Elige tus servicios a continuacion</p>
 </div>
+
 
 
 <div class="app">

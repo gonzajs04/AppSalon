@@ -1,7 +1,7 @@
 <?php 
 
 namespace Controllers;
-use MVC\Router;
+use Model\CitaServicios;
 use Model\Servicio;
 use Model\Cita;
 class ApiController{
@@ -12,10 +12,26 @@ class ApiController{
     }        
 
     public static function guardar(){
+        //Almacena la cita y devuelve el ID
         $cita = new Cita($_POST); //Instancio el modelo de Cita y le paso los datos del form.
         $resultado = $cita->guardar(); //Lo guardo en la base de datos
-    
-        echo json_encode($resultado); //envio el resultado
+        $idCita = $resultado['id']; //extraigo la id de la cita
+
+        //Almacena las citas y el servicios
+        $idServicios = explode(',',$_POST['servicios']); // me devuelve un arreglo con los datos separados
+
+        foreach($idServicios as $idServicio){
+            $args = [
+                'idCita' =>$idCita,
+                'idServicio'=>$idServicio
+            ];
+            $citaServicios = new CitaServicios($args);
+            $res2 = $citaServicios->guardar(); //Guardo en la tabla citas_servicios de la bd
+        }
+        $respuesta = [
+            "resultado"=>$res2, 
+        ];
+        echo json_encode($respuesta); //envio el resultado
     }
 }
 

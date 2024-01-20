@@ -27,12 +27,18 @@
 }
 
 .barra {
-    margin: v.$separacion 0;
-
+    margin: 1rem 1.5rem;
+    p{
+        font-size: 2.3rem;
+        span{
+            font-weight: 700;
+        }
+    }
     @include m.tablet {
         display: flex;
-        justify-content: space-between;
+        justify-content:flex-end;
         align-items:center;
+
     }
 
     .boton {

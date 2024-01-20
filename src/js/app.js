@@ -334,7 +334,6 @@ async function reservarCita() {
   datos.append("fecha", fecha);
   datos.append("hora", hora);
   datos.append("servicios", idServicios);
-
   try {
     //Peticion hacia la api
     const url = "http://localhost:3000/api/citas";
@@ -362,13 +361,14 @@ async function reservarCita() {
         icon: "error",
         title: "Error...",
         text: "Hubo un error",
-      }).then(() => {
-        //Actualizo la pagina
-        window.location.reload();
-      },3000);
-  }
+    //   }).then(() => {
+    //     //Actualizo la pagina
+    //     window.location.reload();
+    //   },3000);
+  })
 
   //console.log([...datos]); //Sirve para consultar los datos. Sin el spread y el formateo a un Array, no funciona
+}
 }
 
 function mostrarAlerta(mensaje, tipo, seccion, desaparece = true) {
