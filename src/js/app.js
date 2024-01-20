@@ -3,6 +3,7 @@ const pasoInicial = 1;
 const pasoFinal = 3;
 
 const cita = {
+    id: '',
     nombre: '',
     fecha: '',
     hora: '',
@@ -247,39 +248,88 @@ function mostrarResumen(){
         mostrarAlerta("Faltan rellenar datos o servicios","error",".contenido-resumen",false);
         return;
     }
-        mostrarAlerta("Todos los datos estan bien","exito",".contenido-resumen",false);
+        const {nombre,fecha,hora,servicios} = cita; //Extraigo los datos del objeto de cita
 
-        // Formatear el div de resumen
-        const {nombre,fecha,hora,servicios} = cita;
+        const titleProductos = document.createElement("H3");
+        titleProductos.textContent = "Servicios seleccionado/s";
+        titleProductos.classList.add("titulo-resumen");
+        resumen.appendChild(titleProductos); // Creo un titulo par los servicios seleccionado.
+
+        //Recorrer los servicios con FOR OF
+        for(i=0; i<servicios.length;i++){
+            const contenedorServicio = document.createElement("DIV"); //Creo conntenedor para datos de los servicios
+            contenedorServicio.classList.add('contenedor-servicio');
+
+            //Nombre del servicio
+            const textoServicio = document.createElement("P");
+            textoServicio.textContent = servicios[i].nombre;
+
+            //Parrafo con precio del servicio
+            const precioServicio = document.createElement("P");
+            precioServicio.innerHTML = `<span>Precio: </span> $ ${servicios[i].precio}`;
+
+            //Coloco el texto y el precio en el contenedor de servicios
+            contenedorServicio.appendChild(textoServicio);
+            contenedorServicio.appendChild(precioServicio);
+            resumen.appendChild(contenedorServicio); // Coloco el contenedor de servicios en el contenedor de resumen.
+        }
+        //Datos del cliente
+        const titleDatosCliente = document.createElement("H3");
+        titleDatosCliente.classList.add("titulo-resumen");
+        titleDatosCliente.textContent = "Datos del cliente";
+
         const nombreCliente = document.createElement("P");
         nombreCliente.innerHTML = `<span>Nombre: </span> ${nombre}`;
 
+        //Formatear la fecha en español.
+        const fechaObj = new Date(fecha + ' 00:00');
+        //Dia de la semana texto, el año, mes texto y el dia en numero
+        const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+        const fechaFormateada = fechaObj.toLocaleDateString('es-MX', opciones); 
+
         fechaCita = document.createElement("P");
-        fechaCita.innerHTML = `<span>Fecha: </span> ${fecha}`;
+        fechaCita.innerHTML = `<span>Fecha: </span> ${fechaFormateada}`;
 
         const horaCita =document.createElement("P");
         horaCita.innerHTML = `<span>Hora: </span>${hora}`;
 
+        //Insertar en el resumen los parrafos y divs creados
+        const botonReservar = document.createElement('BUTTON');
+        botonReservar.classList.add("boton");
+        botonReservar.textContent = "Reservar Cita";
+        botonReservar.onclick = reservarCita;
 
-        for(i=0; i<servicios.length;i++){
-            const contenedorServicio = document.createElement("DIV");
-            contenedorServicio.classList.add('contenedor-servicio');
-
-            const textoServicio = document.createElement("P");
-            textoServicio.textContent = servicios[i].nombre;
-
-            const precioServicio = document.createElement("P");
-            precioServicio.innerHTML = `<span>Precio: </span> $ ${servicios[i].precio}`;
-
-            contenedorServicio.appendChild(textoServicio);
-            contenedorServicio.appendChild(precioServicio);
-            resumen.appendChild(contenedorServicio);
-        }
-
+        resumen.appendChild(titleDatosCliente);
         resumen.appendChild(nombreCliente);
         resumen.appendChild(fechaCita);
         resumen.appendChild(horaCita);
-       
+        resumen.appendChild(botonReservar);
+        mostrarAlerta("Todos los datos estan bien","exito",".contenido-resumen",false);
+
+}
+
+async function reservarCita(){
+    const {nombre,fecha,hora,servicios} = cita;
+    const idServicios = servicios.map(servicio => servicio.id);
+    const datos = new FormData(); // Aca, van a ir los datos del formulario
+    datos.append('nombre',nombre);
+    datos.append('fecha',fecha);
+    datos.append('hora',hora);
+    datos.append('servicios',idServicios);
+
+    //Peticion hacia la api
+    const url = 'http://localhost:3000/api/citas';
+
+    //Le digo al servidor que a esa direccion voy a hacer un POST
+    const response = await fetch(url,{
+        method:'POST',
+        body: datos //EL CUERPO DE LA PETICION SON LOS DATOS QUE SE LE ENVIARAN AL SERVIDOR, SIN ESTE, NO SE ENVIARA NADA
+    });
+    const resultado = await response.json(); //transformo el json enviado desde el sv en texto
+    console.log(resultado);
+
+    //console.log([...datos]); //Sirve para consultar los datos. Sin el spread y el formateo a un Array, no funciona
+
 }
 
 function mostrarAlerta(mensaje,tipo,seccion,desaparece = true){

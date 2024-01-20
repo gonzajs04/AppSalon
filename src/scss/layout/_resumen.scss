@@ -10,13 +10,18 @@
         font-weight: v.$bold;
         font-size: 2.4rem;
     }
-}
-.contenedor-servicio {
-    padding: 3rem 0;
-    border-bottom: 1px solid v.$gris;
+    .titulo-resumen{
 
-    &:last-of-type {
-        margin-bottom: v.$separacion;
+        text-align: center;
+        font-size: 1.9rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 2rem;
     }
 }
+.contenedor-servicio {
+    padding: .9rem 0;
+    border-bottom: 1px solid v.$gris;
+}
+
 

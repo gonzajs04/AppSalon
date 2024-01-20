@@ -37,6 +37,8 @@
                 <input type="time" name="hora" id="hora">
             </div>
 
+            <input type="hidden" name="" id="id" value=<?php echo isset($id);?>>
+
         </form>
 
     </div>
@@ -50,6 +52,8 @@
         <button id="anterior" class="boton">&laquo; Anterior</button>
         <button id="siguiente" class="boton"> Siguiente &raquo;</button>
     </div>
+
+
 
 </div>
 <!--DEFINO SOLO ESTA VARIABLE PARA SOLO ESTE ARCHIVO-->
