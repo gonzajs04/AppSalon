@@ -37,7 +37,7 @@
                 <input type="time" name="hora" id="hora">
             </div>
 
-            <input type="hidden" name="" id="id" value=<?php echo isset($id);?>>
+            <input type="hidden" id="id" value=<?php echo isset($id);?>>
 
         </form>
 
@@ -57,7 +57,9 @@
 
 </div>
 <!--DEFINO SOLO ESTA VARIABLE PARA SOLO ESTE ARCHIVO-->
-<?php $script = " 
+<?php $script = "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
     <script src='build/js/app.js'></script>
 ";
 
