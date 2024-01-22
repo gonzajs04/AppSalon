@@ -37,10 +37,10 @@ CREATE TABLE Citas(
 );
 
 CREATE TABLE Citas_Servicios(
-    idCitaSevicio int not null auto_increment,
+    id int not null auto_increment,
     idCita int not null,
     idServicio int not null,
-    PRIMARY KEY (idCitaSevicio),
+    PRIMARY KEY (id),
     constraint FK1_CitaServicios foreign key (idCita) references Citas(id),
     constraint FK2_ServicioCita foreign key (idServicio) references Servicios(id)
 );
@@ -52,3 +52,28 @@ INSERT INTO Servicios (nombre, precio) VALUES
 ('Tratamiento capilar', 250),
 ('Manicura', 50),
 ('Pedicura', 70);
+
+INSERT INTO Usuarios(nombre,apellido,telefono,email,pass,esAdmin,confirmado,token) VALUES
+("Gonzalo","Hernandez","1144657777","gonza@gonza.com","1234567",1,1,""),
+("Ivan","Hernan","1131653752","phelpscole990@gmail.com","DanaTeAmo",0,1,"");
+
+
+/*CONSULTAS*/
+/*OBTENER TODAS LAS CITAS QUE TENGAN SERVICIOS Y SUS USUARIOS*/
+SELECT * FROM CITAS LEFT OUTER JOIN usuarios 
+ON citas.idUsuario =  usuarios.id 
+LEFT OUTER JOIN citas_servicios 
+ON citas.id =citas_servicios.idCita
+LEFT OUTER JOIN servicios
+ON servicios.id = citas_servicios.idServicio;
+
+/*oBTENER LAS CITAS DEL DIA DE HOY, CARACTERISTICAS DEL USUARIO como nombre apellido telefono Y EL SERVICIO ELEGIDO con sus caracteristicas*/
+
+SELECT citas.id, CONCAT(usuarios.nombre,' ', usuarios.apellido) as "cliente", usuarios.telefono as "telefono", usuarios.email, servicios.nombre as "servicio", servicios.precio, citas.hora as "hora" FROM CITAS LEFT OUTER JOIN usuarios 
+ON citas.idUsuario =  usuarios.id 
+LEFT OUTER JOIN citas_servicios
+ON citas.id =citas_servicios.idCita
+LEFT OUTER JOIN servicios
+ON servicios.id = citas_servicios.idServicio WHERE citas.fecha = "2024-01-23";
+
+
