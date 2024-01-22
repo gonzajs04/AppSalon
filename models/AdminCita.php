@@ -1,4 +1,5 @@
 <?php
+namespace Model;
 use Model\ActiveRecord;
 class AdminCita extends ActiveRecord{
     protected static $tabla = "citas_servicios";

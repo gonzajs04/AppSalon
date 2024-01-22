@@ -34,7 +34,6 @@ class ActiveRecord {
     public static function consultarSQL($query) {
         // Consultar la base de datos
         $resultado = self::$db->query($query);
-        
 
         // Iterar los resultados
         
@@ -126,6 +125,14 @@ class ActiveRecord {
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
+
+    //Consulta Plana de SQL(Utilizar cuando los metodos del modelo no son suficientes)
+    public static function SQL($consulta){ //le poaso la columna y el valor que queremos buscar
+        $resultado = self::consultarSQL($consulta);
+        return $resultado;
+    }
+    
+
     // Obtener Registros con cierta cantidad
     public static function get($limite) {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT " + $limite;

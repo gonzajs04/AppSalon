@@ -77,3 +77,4 @@ LEFT OUTER JOIN servicios
 ON servicios.id = citas_servicios.idServicio WHERE citas.fecha = "2024-01-23";
 
 
+
