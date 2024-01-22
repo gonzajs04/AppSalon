@@ -18,15 +18,19 @@
             if(isset($idCita) != $cita->id){
                 $idCita = $cita->id;
         ?>
-            <li><p>ID: <span><?php echo $cita->id ?></span></p></li>
-            <li><p>Hora: <span><?php echo $cita->hora ?></span></p></li>
-            <li><p>Cliente: <span><?php echo $cita->cliente ?></span></p></li>
-            <li><p>Telefono: <span><?php echo $cita->telefono ?></span></p></li>
-            <li><p>Email: <span><?php echo $cita->email ?></span></p></li>
+             <li>
+            <p>ID: <span><?php echo $cita->id ?></span></p>
+             <p>Hora: <span><?php echo $cita->hora ?></span></p>
+            <p>Cliente: <span><?php echo $cita->cliente ?></span></p>
+            <p>Telefono: <span><?php echo $cita->telefono ?></span></p>
+            <p>Email: <span><?php echo $cita->email ?></span></p>
+            <h3>Servicios</h3>
         <?php  } //FIN DE IF ?>
-            <li><p>Servicio: <span><?php echo $cita->servicio ?></span></p></li>
-            <li><p>Precio: <span><?php echo $cita->precio ?></span></p></li>
+            <p class="servicio"><span><?php echo $cita->servicio ." $" .$cita->precio ?></span></p>
+         
+      
         <?php } //FIN FOR EACH ?>
+        </li>
         </ul>
     </div>
 </section>
