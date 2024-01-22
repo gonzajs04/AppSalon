@@ -91,7 +91,7 @@
             return self::$alertas; //retorno el error
         }
         public function comprobarPasswordAndVerificado($password,$hashed_password){
-           
+        
             $estaConfirmado = false;
             //Password verify tiene 2 argumentos (valor real, hasheado), devuelve TRUE O FALSE
             if(!$this->confirmado){
@@ -100,7 +100,10 @@
             }else{
                 $estaConfirmado = true;
                 $resultado = password_verify($password, $hashed_password);
-                if(!$resultado){
+                //ELIMINAR, ESTO ES SOLO EN DESARROLLO
+
+                
+                if($password != $hashed_password && !$resultado){
                     self::$alertas['error'][] = "Contraseña incorrecta";
                     $estaConfirmado = false;
                     

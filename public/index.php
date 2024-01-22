@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\LoginController;
+use Controllers\AdminController;
 use MVC\Router;
 use Controllers\CitaController;
 use Controllers\ApiController;
@@ -40,7 +41,7 @@ $router->get("/api/servicios",[ApiController::class,'index']);
 $router->post("/api/citas",[ApiController::class,"guardar"]);
 
 //ADMIN
-$router->("/admin",[AdminController::class],"index");
+$router->get("/admin",[AdminController::class,"index"]);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
