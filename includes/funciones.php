@@ -12,6 +12,9 @@ function s($html) : string {
     $s = htmlspecialchars($html);
     return $s;
 }
+function esUltimo(string $actual,string $proximo): bool{
+    return $actual!=$proximo ? true : false;
+}
 function isAuth(): void{
     if(!isset($_SESSION['login'])){
         header('Location: /');
