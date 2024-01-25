@@ -18,7 +18,7 @@ class ApiController{
         $idCita = $resultado['id']; //extraigo la id de la cita
 
         //Almacena las citas y el servicios
-        $idServicios = explode(',',$_POST['servicios']); // me devuelve un arreglo con los datos separados
+        $idServicios = explode(',',$_POST['servicios']); // me devuelve un arreglo con cada servicio por separados
 
         foreach($idServicios as $idServicio){
             $args = [
@@ -33,7 +33,19 @@ class ApiController{
         ];
         echo json_encode($respuesta); //envio el resultado
     }
+
+    public static function delete(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = explode(" ",$_POST['id'])[0]; //Quito un espacio que tenia el numero de id: "2 "
+            $cita = Cita::find($id);
+            $cita->eliminar();
+            //Redirecciono a la pagina /admin, es decir, de la pagina donde se realizo el POST
+            header("Location: ". $_SERVER['HTTP_REFERER']);
+        }
+    }
 }
+
+
 
 
 

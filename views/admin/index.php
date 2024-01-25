@@ -7,10 +7,18 @@
         <form class="formulario" action="">
             <div class="campo">
                 <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha">
+                <input type="date" id="fecha" name="fecha" value="<?php echo isset($fecha) ? $fecha : '';?>">
             </div>
         </form>
     </div>
+
+    <?php
+        //Cout: funciona como .length
+        if(count($citas)==0){
+            echo '<h2>No hay citas en esta fecha</h2>';
+        }
+         
+    ?>
 
     <div id="citas-admin">
         <ul class="citas">
@@ -35,10 +43,22 @@
                     $actual = $cita->id;
                     $proximo = $citas[$key + 1]->id ?? 0;
                     if (esUltimo($actual, $proximo)) { ?>
-                        <p class="total">Total: <span> <?php echo $total ?></span></p>
+                        <p class="total">Total: <span> <?php echo "$". $total ?></span></p>
+
+                        <form action="/api/eliminar" method="POST">
+                            <input type="hidden" name="id" value="<?php echo $cita->id;?> ">
+                            <input type="submit" value="Eliminar" class="boton-eliminar">
+
+                        </form>
                     <?php } ?>
 
+
                 <?php } //FIN FOR EACH?>
+
         </ul>
     </div>
 </section>
+
+<?php 
+$script = "<script src='/build/js/buscador.js'></script>"
+?>

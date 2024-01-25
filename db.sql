@@ -5,9 +5,9 @@ use appsalon;
 
 
 CREATE TABLE Usuarios(
-id int not null auto_increment,
-nombre varchar(30),
-apellido varchar(33),
+id int  auto_increment,
+nombre varchar(30) character SET utf8mb4,
+apellido varchar(33) CHARACTER SET utf8mb4,
 telefono varchar(10),
 email varchar(55),
 pass varchar(255), /*Es necesario para el hash 255 en php para asegurarse. Probe hasta con 60 y el password_verify no funciona*/
@@ -19,30 +19,30 @@ PRIMARY KEY(id)
 
 
 CREATE TABLE Servicios(
-id int not null auto_increment,
-nombre varchar(20),
+id int  auto_increment,
+nombre varchar(20) CHARACTER SET utf8mb4,
 precio int,
 PRIMARY KEY(id)
 );
 
 CREATE TABLE Citas(
-    id int not null auto_increment,
-    idUsuario int not null,
+    id int  auto_increment,
+    idUsuario int,
     fecha date not null,
 
     hora time not null,
     PRIMARY KEY (id),
 
-    CONSTRAINT FK_3PersonaCita FOREIGN KEY(idUsuario) references Usuarios(id)
+    CONSTRAINT FK_3PersonaCita FOREIGN KEY(idUsuario) references Usuarios(id) ON DELETE SET NULL
 );
 
 CREATE TABLE Citas_Servicios(
-    id int not null auto_increment,
-    idCita int not null,
-    idServicio int not null,
+    id int  auto_increment,
+    idCita int ,
+    idServicio int ,
     PRIMARY KEY (id),
-    constraint FK1_CitaServicios foreign key (idCita) references Citas(id),
-    constraint FK2_ServicioCita foreign key (idServicio) references Servicios(id)
+    constraint FK1_CitaServicios foreign key (idCita) references Citas(id) ON DELETE SET NULL,
+    constraint FK2_ServicioCita foreign key (idServicio) references Servicios(id) ON DELETE SET NULL
 );
 
 INSERT INTO Servicios (nombre, precio) VALUES
@@ -77,4 +77,12 @@ LEFT OUTER JOIN servicios
 ON servicios.id = citas_servicios.idServicio WHERE citas.fecha = "2024-01-23";
 
 
+/*INSERTAR CITA DE PRUEBA*/
 
+INSERT INTO citas(idUsuario,fecha,hora) VALUES
+(1,"2024-01-24","19:00");
+
+INSERT INTO citas_servicios(idCita,idServicio) VALUES
+(1,1),
+(1,3),
+(1,4);

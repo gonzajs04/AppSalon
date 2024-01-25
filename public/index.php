@@ -39,9 +39,14 @@ $router->get("/cita",[CitaController::class,'index']);
 $router->get("/api/servicios",[ApiController::class,'index']);
 
 $router->post("/api/citas",[ApiController::class,"guardar"]);
+//Eliminar citas: HTTP no soporta delete y tampoco PHP
+$router->post("/api/eliminar", [ApiController::class,"delete"]);
+
 
 //ADMIN
 $router->get("/admin",[AdminController::class,"index"]);
+
+
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
