@@ -1,27 +1,42 @@
 <?php
 namespace Controllers;
 use MVC\Router;
+use Model\Servicio;
 
 class ServicioController{
     public static function index(Router $router){
         $alertas = [];
         session_start();
-
+        isAdmin();
+        $servicios = Servicio::all();
 
         $router ->render("/servicios/index",[
             "alertas"=>$alertas,
-            "nombre"=> $_SESSION['nombre']
+            "nombre"=> $_SESSION['nombre'],
+             'servicios' => $servicios
         ]);
     }
     public static function crear(Router $router){
         session_start();
+        $servicios = new Servicio;
+        $alertas = [];
+
         //En caso de que la vista realice un POST entra al IF, de lo contrario hace tarea del GET
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-            return;
+            //Sincroniza el NUEVO objeto con el POST
+            $servicios->sincronizar($_POST);
+
+            $alertas = $servicios->validar();
+            if(empty($alertas)){
+                $servicios->guardar();
+                header("Location: /servicios");
+            }
         }
 
         $router->render("/servicios/crear",[
-            "nombre"=> $_SESSION['nombre']
+            "nombre"=> $_SESSION['nombre'],
+            "servicios"=> $servicios,
+            "alertas"=> $alertas
         ]);
         
     }

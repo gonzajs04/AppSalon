@@ -4,15 +4,18 @@
 .acciones {
     margin-top: v.$separacion;
     @include m.tablet {
-        display: flex;
+        display: grid;
         justify-content: space-between;
         align-items: center;
     }
+   
 
     a {
         color: v.$blanco;
         display: block;
-        margin-bottom: calc(v.$separacion / 2);
         text-align: center;
+        height: 100%;
+        padding: 1.5rem 1.5rem;
     }
+   
 }

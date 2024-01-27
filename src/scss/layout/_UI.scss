@@ -19,6 +19,7 @@
     }
 
     .app {
+        
         width: 95%;
         margin: 0 auto;
         padding: 3rem 0;
@@ -71,9 +72,13 @@
 
 .barra-servicios {
     margin-bottom: 3rem;
-
-    @include m.desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include m.tablet {
         display: flex;
+        flex-direction: row;
         justify-content: space-around;
     }
 
@@ -81,14 +86,17 @@
         margin: 0 0 1rem 0;
     }
     .link-nav{
-        display: block;
         font-weight: 600;
+    }
+}
+
+.link-nav{
+    display: block;
+    color: v.$blanco;
+    &:hover{
+        text-shadow: 0px 0px 5px v.$azul;
         color: v.$blanco;
-        &:hover{
-            text-shadow: 0px 0px 5px v.$azul;
-            color: v.$blanco;
-            transition: .3s all ease-in-out;
-        }
+        transition: .3s all ease-in-out;
     }
 }
 
@@ -102,4 +110,8 @@
     &:hover{
         color: v.$azul;
     }
+}
+
+.contenedor{
+    padding: 3rem 0;
 }
