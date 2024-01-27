@@ -7,6 +7,7 @@ use Controllers\AdminController;
 use MVC\Router;
 use Controllers\CitaController;
 use Controllers\ApiController;
+use Controllers\ServicioController;
 $router = new Router();
                 //LLAMA A LA CLASE CONTROLADOR   //LLAMA AL METODO LOGIN
 $router->get('/',[LoginController::class, 'login']);
@@ -45,6 +46,15 @@ $router->post("/api/eliminar", [ApiController::class,"delete"]);
 
 //ADMIN
 $router->get("/admin",[AdminController::class,"index"]);
+
+
+//CRUD DE SERVICIOS
+$router->get("/servicios",[ServicioController::class,"index"]);
+$router->get("/servicios/crear",[ServicioController::class,"crear"]);
+$router->post("/servicios/crear",[ServicioController::class,"crear"]);
+$router->get("/servicios/actualizar",[ServicioController::class,"actualizar"]);
+$router->post("/servicios/actualizar",[ServicioController::class,"actualizar"]);
+$router->post("/servicios/eliminar",[ServicioController::class,"eliminar"]);
 
 
 

@@ -1,7 +1,10 @@
+<section class="contenedor">
+<?php include_once __DIR__ . '../../templates/barraservicios.php'; ?>
+
 <?php include_once __DIR__ . '../../templates/barraperfil.php'; ?>
 
-<section class="contenedor">
     <h1 class="nombre-pagina">Panel de administracion</h1>
+
     <h2>Buscar citas</h2>
     <div class="busqueda">
         <form class="formulario" action="">

@@ -13,7 +13,7 @@ class AdminController
         //Defino una variable $fecha con el dia de hoy en el formato de SQL Y-m-d. Le resto 1 dia porque me da 25 en vez de 24
         
         session_start();
-        if (empty($_SESSION)) header("Location: /");
+        isAdmin(); // Protejo la URL /admin
 
         //Obtengo la fecha desde la URL y si no existe le asigno la del dia actual
         $fecha = $_GET['fecha'] ?? date('Y-m-d',strtotime("-1 day"));

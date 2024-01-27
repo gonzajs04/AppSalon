@@ -70,17 +70,28 @@
 }
 
 .barra-servicios {
-    margin-bottom: v.$separacion;
+    margin-bottom: 3rem;
 
-    @include m.tablet {
+    @include m.desktop {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .boton {
         margin: 0 0 1rem 0;
     }
+    .link-nav{
+        display: block;
+        font-weight: 600;
+        color: v.$blanco;
+        &:hover{
+            text-shadow: 0px 0px 5px v.$azul;
+            color: v.$blanco;
+            transition: .3s all ease-in-out;
+        }
+    }
 }
+
 
 .logout{
     color: white;
