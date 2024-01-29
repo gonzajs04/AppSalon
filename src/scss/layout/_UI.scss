@@ -18,11 +18,15 @@
         }
     }
 
+    .app-citas{
+        padding: 0 3rem;
+    }
     .app {
         
         width: 95%;
         margin: 0 auto;
-        padding: 3rem 0;
+        padding: 3rem 3rem;
+        overflow-x: hidden;
         @include m.tablet{
             overflow-y: scroll;
             &::-webkit-scrollbar{
@@ -42,6 +46,7 @@
 .barra {
     margin: 1rem 1.5rem;
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -71,7 +76,6 @@
 }
 
 .barra-servicios {
-    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

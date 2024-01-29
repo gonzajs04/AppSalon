@@ -22,7 +22,6 @@ class AdminController
         if(!checkdate($fecha[1],$fecha[2],$fecha[0])) header('Location: /admin');
         //Consultar la base de datos.
 
-
         //Uno nuevamente el array con el año,mes y dia y lo separo por -
         $fecha = implode('-',$fecha);
 

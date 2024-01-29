@@ -55,3 +55,5 @@ GUIA PARA DEPLOY DE PROYECTO PHP
 
 DOM CLOUD
 https://domcloud.co/
+
+App Salon: página web y sistema para peluquería, desarrollada con PHP, MySQL, Sass, JavaScript, GulpJS y arquitectura MVC y Active Record.

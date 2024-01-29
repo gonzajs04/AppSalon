@@ -28,7 +28,6 @@ function iniciarApp() {
   seleccionarFecha(); //Añade la fecha en el objeto de cita
   seleccionarHora(); //Añade la hora de la cita en el objeto
 
-  mostrarResumen(); //Muestra el resumen
 }
 
 async function consumirApi() {
@@ -95,6 +94,8 @@ function botonesPaginador() {
   } else if (paso === 3) {
     paginaAnterior.classList.remove("ocultar");
     paginaSiguiente.classList.add("ocultar");
+    mostrarResumen();
+
   } else {
     paginaAnterior.classList.remove("ocultar");
     paginaSiguiente.classList.remove("ocultar");

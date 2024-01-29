@@ -19,6 +19,7 @@ class ServicioController{
     public static function crear(Router $router){
         session_start();
         $servicios = new Servicio;
+        $servicios->nombre = '';
         $alertas = [];
 
         //En caso de que la vista realice un POST entra al IF, de lo contrario hace tarea del GET
@@ -32,6 +33,7 @@ class ServicioController{
                 header("Location: /servicios");
             }
         }
+
 
         $router->render("/servicios/crear",[
             "nombre"=> $_SESSION['nombre'],

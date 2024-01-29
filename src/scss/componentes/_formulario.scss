@@ -6,6 +6,12 @@
     width: 100%;
 }
 
+.picker{
+    background-color: transparent;
+    width: 100%;
+    position: absolute;
+    opacity: 0;  
+}
 .campo {
     display: flex;
     margin-bottom: 2rem;
@@ -13,16 +19,41 @@
     label {
         flex: 0 0 10rem;
     }
-    input {
-        flex: 1;
-        border: none;
-        padding: calc(v.$separacion / 4);
-        border-radius: 1rem;
+   
 
+    
+    input{
+        background-color: transparent;
+        color: v.$blanco;
+        outline: none;
+        margin: 0 2rem;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid v.$azul;
+
+        width: 100%;
+        border-radius: 0px;
+        padding: .5rem 0;
+        
+        flex: 1;
+        
         &:disabled {
             background-color: lighten(v.$negro, 30%);
             color: v.$blanco;
             cursor: not-allowed;
         }
+        
+    }
+
+   
+    input[type="date"]::-webkit-calendar-picker-indicator {
+
+     @extend .picker
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator{
+        @extend .picker
+ 
     }
 }
+

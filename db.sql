@@ -79,10 +79,10 @@ ON servicios.id = citas_servicios.idServicio WHERE citas.fecha = "2024-01-23";
 
 /*INSERTAR CITA DE PRUEBA*/
 
-INSERT INTO citas(idUsuario,fecha,hora) VALUES
+INSERT INTO Citas(idUsuario,fecha,hora) VALUES
 (1,"2024-01-24","19:00");
 
-INSERT INTO citas_servicios(idCita,idServicio) VALUES
+INSERT INTO Citas_Servicios(idCita,idServicio) VALUES
 (1,1),
 (1,3),
 (1,4);

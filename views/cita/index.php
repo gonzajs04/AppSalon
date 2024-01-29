@@ -10,7 +10,7 @@
 
 
 
-<div class="app">
+<div class="app-citas">
     <nav class="tabs">
         <button type="button" class="actual " data-paso="1">Servicios</button>
         <button type="button"  data-paso="2" >Informacion Cita</button>
