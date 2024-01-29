@@ -68,7 +68,7 @@ class ServicioController{
     }
     public static function eliminar(){
         session_start();
-        isAuth();
+        isAdmin();
         if(!is_numeric($_POST['id'])) return;
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){

@@ -34,8 +34,8 @@ function iniciarApp() {
 async function consumirApi() {
   //funcion asincrona debido a que necesitamos que se ejecuten otras funciones mientras se consulta la API
   try {
-    const response = await fetch("http://localhost:3000/api/servicios"); //Hasta que no se complete el fetch, no se ejecutara la siguiente linea. Esto me devuelve un JSON
-
+   
+    const response = await fetch(`/api/servicios`); //Hasta que no se complete el fetch, no se ejecutara la siguiente linea. Esto me devuelve un JSON
     const servicios = await response.json(); // JSON a OBJETO O ARRAY
     mostrarServicios(servicios);
   } catch (error) {
@@ -336,7 +336,7 @@ async function reservarCita() {
   datos.append("servicios", idServicios);
   try {
     //Peticion hacia la api
-    const url = "http://localhost:3000/api/citas";
+    const url = "/api/citas";
 
     //Le digo al servidor que a esa direccion voy a hacer un POST
     const response = await fetch(url, {

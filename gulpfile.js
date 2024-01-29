@@ -63,3 +63,5 @@ function watchArchivos() {
 exports.css = css;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript,  imagenes, versionWebp,  watchArchivos ); 
+//Quitamos el watch para el build
+exports.build = parallel(css, javascript,  imagenes, versionWebp ); 

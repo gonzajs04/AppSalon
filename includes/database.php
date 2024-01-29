@@ -1,7 +1,14 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'appsalon');
+$db = mysqli_connect(
+    $_ENV['DB_HOST'], 
+    $_ENV['DB_USER'], 
+    $_ENV['DB_PASS'], 
+    $_ENV['DB_NAME']
+);
 
+//Se setea el codigo de caracteres UTF8 para los acentos y las ñ
+$db->set_charset('utf8');
 
 if (!$db) {
     echo "Error: No se pudo conectar a MySQL.";
