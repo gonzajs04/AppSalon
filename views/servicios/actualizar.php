@@ -7,7 +7,7 @@
 <h1 class="nombre-pagina">Actualizar servicios</h1>
 
 <form action="" method="post" class="formulario">
-<?php include_once __DIR__ . "./formulario.php"; ?>
+<?php include_once __DIR__ . "/formulario.php"; ?>
 
 <input type="submit" value="Actualizar servicio" class="boton">
 </form>

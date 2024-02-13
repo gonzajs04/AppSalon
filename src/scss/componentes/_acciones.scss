@@ -5,7 +5,7 @@
     margin-top: v.$separacion;
     @include m.tablet {
         display: grid;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
     }
    

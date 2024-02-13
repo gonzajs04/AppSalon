@@ -6,7 +6,7 @@ namespace Model;
 use Model\ActiveRecord;
 class CitaServicios extends ActiveRecord{
 
-    protected static $tabla = 'citas_servicios';
+    protected static $tabla = 'Citas_Servicios';
     protected static $columnasDB = ['id','idCita','idServicio'];
     public $idCitaServicio;
     public $idCita;

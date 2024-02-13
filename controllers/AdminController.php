@@ -25,16 +25,16 @@ class AdminController
         //Uno nuevamente el array con el año,mes y dia y lo separo por -
         $fecha = implode('-',$fecha);
 
-        $consulta =  "SELECT citas.id, CONCAT(usuarios.nombre,' ', usuarios.apellido) as 'cliente', usuarios.telefono as 'telefono',";
-        $consulta .= "usuarios.email, servicios.nombre as 'servicio', servicios.precio, citas.hora as 'hora' ";
-        $consulta .= "FROM CITAS ";
-        $consulta .= "LEFT OUTER JOIN usuarios ";
-        $consulta .= "ON citas.idUsuario =  usuarios.id ";
-        $consulta .= "LEFT OUTER JOIN citas_servicios ";
-        $consulta .= "ON citas.id =citas_servicios.idCita ";
-        $consulta .= "LEFT OUTER JOIN servicios ";
-        $consulta .= "ON servicios.id = citas_servicios.idServicio ";
-        $consulta .= "WHERE citas.fecha = '" . $fecha . "';";
+        $consulta =  "SELECT Citas.id, CONCAT(Usuarios.nombre,' ', Usuarios.apellido) as 'cliente', Usuarios.telefono as 'telefono',";
+        $consulta .= "Usuarios.email, Servicios.nombre as 'servicio', Servicios.precio, Citas.hora as 'hora' ";
+        $consulta .= "FROM Citas ";
+        $consulta .= "LEFT OUTER JOIN Usuarios ";
+        $consulta .= "ON Citas.idUsuario =  Usuarios.id ";
+        $consulta .= "LEFT OUTER JOIN Citas_Servicios ";
+        $consulta .= "ON Citas.id =Citas_Servicios.idCita ";
+        $consulta .= "LEFT OUTER JOIN Servicios ";
+        $consulta .= "ON Servicios.id = Citas_Servicios.idServicio ";
+        $consulta .= "WHERE Citas.fecha = '" . $fecha . "';";
         $citas = AdminCita::SQL($consulta);
         $router->render('admin/index', [
             "alertas" => $alertas,
