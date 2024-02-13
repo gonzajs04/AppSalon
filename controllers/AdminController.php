@@ -43,5 +43,4 @@ class AdminController
             "citas" => $citas
         ]);
     }
-   
 }
